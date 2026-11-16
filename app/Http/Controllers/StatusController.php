@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class StatusController extends Controller
-{ 
+{
     private array $statusList = [
         'Diproses',
         'Dicuci',
@@ -23,9 +23,18 @@ class StatusController extends Controller
         $transaksi = null;
         $statusSekarang = null;
 
-        if ($idTransaksi) {
+        if ($idTransaksi && ctype_digit((string) $idTransaksi)) {
             $transaksi = Transaksi::with('pelanggan')->where('id_transaksi', $idTransaksi)->first();
             $statusSekarang = $transaksi?->status_laundry;
+        }
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'found' => (bool) $transaksi,
+                'id_transaksi' => $transaksi?->id_transaksi,
+                'nama_pelanggan' => $transaksi?->pelanggan?->nama_pelanggan,
+                'status_laundry' => $statusSekarang,
+            ]);
         }
 
         return view('StatusUpdateView', [
