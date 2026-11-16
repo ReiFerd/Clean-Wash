@@ -9,3 +9,4 @@ Route::get('/', function () {
 
 Route::get('/status', [StatusController::class, 'index'])->name('status.index');
 Route::put('/status/{id_transaksi?}', [StatusController::class, 'update'])->name('status.update');
+Route::get('/status/{id?}', [StatusCekController::class, 'index'])->name('status.index');
