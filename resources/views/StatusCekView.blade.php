@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Status Laundry</title>
+    <style>
+        .text-muted { color: gray; }
+        .text-bold { font-weight: bold; }
+        .active-status { color: blue; }
+    </style>
 </head>
 <body>
     <header>
@@ -24,12 +29,18 @@
             <h2>Alur Status Pesanan</h2>
             <ol>
                 @foreach($timeline as $item)
+                    @php
+                        $isPassedOrActive = $item['selesai'];
+                        $isActive = !empty($item['aktif']);
+                    @endphp
                     <li>
-                        <p><strong>{{ $item['status'] }}</strong></p>
-                        <p>Waktu: {{ $item['waktu'] }}</p>
-                        @if(!empty($item['aktif']))
-                            <p><span>[Status Aktif]</span></p>
-                        @endif
+                        <p class="{{ $isPassedOrActive ? 'text-bold' : 'text-muted' }}" style="{{ $isPassedOrActive ? '' : 'color: #999;' }}">
+                            <strong>{{ $item['status'] }}</strong>
+                            @if($isActive)
+                                <span class="active-status">[Status Aktif]</span>
+                            @endif
+                        </p>
+                        <p class="{{ $isPassedOrActive ? '' : 'text-muted' }}">Waktu: {{ $item['waktu'] }}</p>
                     </li>
                 @endforeach
             </ol>
