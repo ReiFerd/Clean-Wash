@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\StatusCekController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -9,4 +10,4 @@ Route::get('/', function () {
 
 Route::get('/status', [StatusController::class, 'index'])->name('status.index');
 Route::put('/status/{id_transaksi?}', [StatusController::class, 'update'])->name('status.update');
-Route::get('/status/{id?}', [StatusCekController::class, 'index'])->name('status.index');
+Route::get('/status-cek/{id?}', [StatusCekController::class, 'index'])->name('status.index');
