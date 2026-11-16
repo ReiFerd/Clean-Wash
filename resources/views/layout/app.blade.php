@@ -7,6 +7,8 @@
     <title>Clean Wash</title>
 </head>
 <body>
-    
+    <main>
+        @yield ('content')
+    </main>
 </body>
 </html>
