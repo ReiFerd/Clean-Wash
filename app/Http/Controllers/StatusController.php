@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Transaksi;
 use App\Models\Layanan;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class StatusController extends Controller
 { 
@@ -23,7 +24,7 @@ class StatusController extends Controller
         $statusSekarang = null;
 
         if ($idTransaksi) {
-            $transaksi = Transaksi::where('id_transaksi', $idTransaksi)->first();
+            $transaksi = Transaksi::with('pelanggan')->where('id_transaksi', $idTransaksi)->first();
             $statusSekarang = $transaksi?->status_laundry;
         }
 
