@@ -20,3 +20,4 @@ Route::get('/status/{id?}', [StatusCekController::class, 'index'])->name('status
 
 // Fitur Laporan Pendapatan dan Transaksi (Arya)
 Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+Route::get('/status-cek/{id?}', [StatusCekController::class, 'index'])->name('status.index');
