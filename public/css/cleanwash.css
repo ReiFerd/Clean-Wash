@@ -1,0 +1,19 @@
+/* Tema tampilan CleanWash */
+:root {
+    --cw-dark: #0b2545;
+    --cw-soft: #eef4ff;
+}
+body { background: var(--cw-soft); font-family: 'Segoe UI', system-ui, sans-serif; }
+
+.cw-navbar { background: var(--cw-dark); }
+.cw-navbar .navbar-brand { font-weight: 700; letter-spacing: .5px; }
+.cw-navbar .nav-link { color: #cfe0ff; }
+.cw-navbar .nav-link:hover,
+.cw-navbar .nav-link.active { color: #fff; font-weight: 600; }
+
+.cw-card { border: 0; border-radius: 14px; box-shadow: 0 4px 14px rgba(11, 37, 69, .08); }
+.cw-card .card-header { background: #fff; border-bottom: 1px solid #e6edf8; border-radius: 14px 14px 0 0 !important; }
+
+.badge-status { font-size: .8rem; padding: .45em .8em; border-radius: 20px; }
+.table thead th { background: #f4f8ff; }
+.btn { border-radius: 8px; }
