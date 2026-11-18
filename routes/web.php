@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\StatusCekController;
 use App\Http\Controllers\PelangganController;
@@ -9,6 +10,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Fitur Auth
+Route::get('/login', [AuthController::class, 'showlogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/register', [AuthController::class, 'showregister'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Fitur CRUD Pelanggan (May)
 Route::resource('pelanggan', PelangganController::class);
