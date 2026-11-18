@@ -43,6 +43,8 @@
                 <button type="submit">Login</button>
             </div>
         </form>
+
+        <p>Belum punya akun? <a href="{{ route('register') }}">Register</a></p>
     @endauth
 </body>
 </html>
