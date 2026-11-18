@@ -38,84 +38,190 @@
     @endif
 
     <style>
-        @media print {
-            .no-print {
-                display: none !important;
-            }
-            body {
-                background-color: white !important;
-                color: black !important;
-                font-size: 12pt;
-            }
-            .print-only {
-                display: block !important;
-            }
-            .card-shadow {
-                box-shadow: none !important;
-                border: 1px solid #e2e8f0 !important;
-            }
-        }
-        .print-only {
-            display: none;
-        }
-    </style>
+* { box-sizing: border-box; }
+
+html, body {
+    width: 100% !important;
+    min-width: 320px;
+    margin: 0 !important;
+    overflow-x: hidden !important;
+}
+body {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+    background: #eef4ff !important;
+    color: #172b45;
+}
+header, footer {
+    display: block !important;
+    width: 100% !important;
+    flex-shrink: 0;
+}
+header > div, footer > div {
+    width: calc(100% - 48px) !important;
+    max-width: 1440px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+main {
+    display: block !important;
+    float: none !important;
+    flex: 1 0 auto !important;
+    width: calc(100% - 48px) !important;
+    max-width: 1440px !important;
+    min-width: 0 !important;
+    margin: 28px auto !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Semua bagian utama melebar penuh dan tersusun ke bawah */
+main > div,
+main > section,
+main > div > section {
+    display: block !important;
+    float: none !important;
+    clear: both !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-bottom: 24px !important;
+}
+
+/* Kartu statistik berjajar rapi */
+main > section:first-of-type,
+main > div > section:first-of-type {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+}
+main > section:first-of-type > div,
+main > div > section:first-of-type > div {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    position: relative !important;
+    background: white !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    box-shadow: none !important;
+}
+main .absolute { display: none !important; }
+
+/* Ringkasan status */
+main > section:nth-of-type(2) > .grid,
+main > div > section:nth-of-type(2) > .grid {
+    display: grid !important;
+    width: 100% !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+}
+
+/* Filter */
+main form { width: 100% !important; }
+main form > .grid {
+    display: grid !important;
+    width: 100% !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+}
+main input, main select { width: 100%; max-width: 100%; }
+
+/* Tabel */
+main .overflow-x-auto {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+}
+main table {
+    width: 100% !important;
+    min-width: 950px;
+    border-collapse: collapse;
+}
+main th { background: #f1f5fb !important; }
+main td, main th { padding: 14px 16px; }
+
+@media(max-width: 900px) {
+    main > section:first-of-type,
+    main > div > section:first-of-type {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+    main > section:nth-of-type(2) > .grid,
+    main > div > section:nth-of-type(2) > .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+    main form > .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+@media(max-width: 560px) {
+    main, header > div, footer > div {
+        width: calc(100% - 24px) !important;
+    }
+    main > section:first-of-type,
+    main > div > section:first-of-type,
+    main > section:nth-of-type(2) > .grid,
+    main > div > section:nth-of-type(2) > .grid,
+    main form > .grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+@media print {
+    .no-print { display: none !important; }
+    body { background: white !important; color: black !important; }
+    .print-only { display: block !important; }
+}
+.print-only { display: none; }
+</style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col antialiased">
 
     {{-- TOP NAVBAR --}}
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs no-print">
+    <header class="bg-[#0b2545] border-b border-slate-700 sticky top-0 z-30 shadow-none no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 {{-- Logo & Brand --}}
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 to-cyan-500 flex items-center justify-center text-white shadow-md shadow-sky-500/20">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                        </svg>
-                    </div>
                     <div>
                         <a href="{{ url('/') }}" class="text-xl font-bold tracking-tight bg-gradient-to-r from-sky-700 to-cyan-600 bg-clip-text text-transparent">
                             Clean-Wash
                         </a>
-                        <p class="text-[11px] text-slate-500 font-medium">Sistem Informasi Manajemen Laundry</p>
+                        <p class="text-[11px] text-slate-300 font-medium">Sistem Informasi Manajemen Laundry</p>
                     </div>
                 </div>
 
                 {{-- Navigasi Menu --}}
                 <nav class="hidden md:flex items-center gap-1 text-sm font-medium">
-                    <a href="{{ url('/') }}" class="px-3 py-2 rounded-lg text-slate-600 hover:text-sky-600 hover:bg-slate-100 transition">
+                    <a href="{{ url('/') }}" class="px-3 py-2 rounded-lg text-slate-100 hover:text-white hover:bg-white/10 transition">
                         Beranda
                     </a>
-                    <a href="{{ route('pelanggan.index') }}" class="px-3 py-2 rounded-lg text-slate-600 hover:text-sky-600 hover:bg-slate-100 transition">
+                    <a href="{{ route('pelanggan.index') }}" class="px-3 py-2 rounded-lg text-slate-100 hover:text-white hover:bg-white/10 transition">
                         Data Pelanggan
                     </a>
-                    <a href="{{ route('status.index') }}" class="px-3 py-2 rounded-lg text-slate-600 hover:text-sky-600 hover:bg-slate-100 transition">
+                    <a href="{{ route('status.index') }}" class="px-3 py-2 rounded-lg text-slate-100 hover:text-white hover:bg-white/10 transition">
                         Update Status
                     </a>
-                    <a href="{{ route('status.cek') }}" class="px-3 py-2 rounded-lg text-slate-600 hover:text-sky-600 hover:bg-slate-100 transition">
+                    <a href="{{ route('status.cek') }}" class="px-3 py-2 rounded-lg text-slate-100 hover:text-white hover:bg-white/10 transition">
                         Cek Status
                     </a>
-                    <a href="{{ route('laporan.index') }}" class="px-3 py-2 rounded-lg bg-sky-50 text-sky-700 font-semibold border border-sky-200/60 shadow-xs">
+                    <a href="{{ route('laporan.index') }}" class="px-4 py-2 rounded-xl bg-white/15 text-white font-semibold border border-white/20 shadow-none">
                         Laporan Keuangan
                     </a>
                 </nav>
-
-                {{-- Info User / Profil --}}
-                <div class="flex items-center gap-2">
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-sky-100 text-sky-800 border border-sky-200">
-                        <span class="w-2 h-2 rounded-full bg-sky-600 animate-pulse"></span>
-                        Arya (Laporan)
-                    </span>
-                </div>
             </div>
         </div>
 
         {{-- Mobile Navigasi (Tabs ringkas) --}}
-        <div class="md:hidden flex overflow-x-auto px-4 py-2 bg-slate-100/70 border-t border-slate-200 text-xs font-medium gap-2">
-            <a href="{{ url('/') }}" class="px-3 py-1.5 rounded-md text-slate-600 whitespace-nowrap">Beranda</a>
-            <a href="{{ route('pelanggan.index') }}" class="px-3 py-1.5 rounded-md text-slate-600 whitespace-nowrap">Pelanggan</a>
-            <a href="{{ route('status.index') }}" class="px-3 py-1.5 rounded-md text-slate-600 whitespace-nowrap">Update Status</a>
-            <a href="{{ route('status.cek') }}" class="px-3 py-1.5 rounded-md text-slate-600 whitespace-nowrap">Cek Status</a>
+        <div class="md:hidden flex overflow-x-auto px-4 py-2 bg-[#0b2545] border-t border-slate-700 text-xs font-medium gap-2">
+            <a href="{{ url('/') }}" class="px-3 py-1.5 rounded-md text-slate-100 whitespace-nowrap">Beranda</a>
+            <a href="{{ route('pelanggan.index') }}" class="px-3 py-1.5 rounded-md text-slate-100 whitespace-nowrap">Pelanggan</a>
+            <a href="{{ route('status.index') }}" class="px-3 py-1.5 rounded-md text-slate-100 whitespace-nowrap">Update Status</a>
+            <a href="{{ route('status.cek') }}" class="px-3 py-1.5 rounded-md text-slate-100 whitespace-nowrap">Cek Status</a>
             <a href="{{ route('laporan.index') }}" class="px-3 py-1.5 rounded-md bg-sky-600 text-white font-semibold whitespace-nowrap">Laporan</a>
         </div>
     </header>
@@ -187,8 +293,8 @@
             </div>
 
             {{-- Card 2: Jumlah Transaksi Unik --}}
-            <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs hover:shadow-md transition relative overflow-hidden group">
-                <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-sky-50 rounded-full group-hover:scale-110 transition duration-300 pointer-events-none"></div>
+            <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-none hover:shadow-none transition relative overflow-hidden group">
+                <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-sky-50 rounded-lg group-hover:scale-110 transition duration-300 pointer-events-none"></div>
                 <div class="flex items-center justify-between mb-3 relative">
                     <span class="text-xs font-semibold uppercase tracking-wider text-sky-700 bg-sky-50 px-2.5 py-1 rounded-lg border border-sky-200/50">
                         Jumlah Transaksi
@@ -209,8 +315,8 @@
             </div>
 
             {{-- Card 3: Rata-Rata Transaksi --}}
-            <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs hover:shadow-md transition relative overflow-hidden group">
-                <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-indigo-50 rounded-full group-hover:scale-110 transition duration-300 pointer-events-none"></div>
+            <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-none hover:shadow-none transition relative overflow-hidden group">
+                <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-indigo-50 rounded-lg group-hover:scale-110 transition duration-300 pointer-events-none"></div>
                 <div class="flex items-center justify-between mb-3 relative">
                     <span class="text-xs font-semibold uppercase tracking-wider text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-200/50">
                         Rata-Rata Transaksi
@@ -230,8 +336,8 @@
             </div>
 
             {{-- Card 4: Transaksi Selesai & Total Cucian --}}
-            <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs hover:shadow-md transition relative overflow-hidden group">
-                <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-amber-50 rounded-full group-hover:scale-110 transition duration-300 pointer-events-none"></div>
+            <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-none hover:shadow-none transition relative overflow-hidden group">
+                <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-amber-50 rounded-lg group-hover:scale-110 transition duration-300 pointer-events-none"></div>
                 <div class="flex items-center justify-between mb-3 relative">
                     <span class="text-xs font-semibold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200/50">
                         Pengerjaan Selesai
@@ -254,7 +360,7 @@
         </section>
 
         {{-- RINGKASAN STATUS LAUNDRY (STATUS BREAKDOWN CHIPS) --}}
-        <section class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-xs mb-8 no-print">
+        <section class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-none mb-8 no-print">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
                 <h3 class="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
                     <svg class="w-4 h-4 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -294,7 +400,7 @@
         </section>
 
         {{-- SECTION C: FILTER LAPORAN --}}
-        <section class="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-6 mb-8 no-print">
+        <section class="bg-white rounded-2xl border border-slate-200/80 shadow-none p-6 mb-8 no-print">
             <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
                 <div>
                     <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
@@ -387,7 +493,7 @@
                 {{-- Action Buttons --}}
                 <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
                     <div class="flex items-center gap-2">
-                        <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-sky-600 hover:bg-sky-700 text-white shadow-sm shadow-sky-600/30 transition active:scale-95">
+                        <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-sky-600 hover:bg-sky-700 text-white shadow-none shadow-none transition active:scale-95">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
@@ -416,7 +522,7 @@
         </section>
 
         {{-- SECTION B: TABEL RIWAYAT TRANSAKSI --}}
-        <section class="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden card-shadow">
+        <section class="bg-white rounded-2xl border border-slate-200/80 shadow-none overflow-hidden card-shadow">
             
             {{-- Header Tabel --}}
             <div class="px-6 py-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-slate-50/60">
@@ -428,7 +534,7 @@
                         Menampilkan transaksi lengkap dengan status dan total rincian biaya.
                     </p>
                 </div>
-                <div class="text-xs text-slate-500 font-medium bg-white px-3 py-1.5 rounded-lg border border-slate-200/60 shadow-2xs">
+                <div class="text-xs text-slate-500 font-medium bg-white px-3 py-1.5 rounded-lg border border-slate-200/60 shadow-none">
                     Total: <strong class="text-slate-900">{{ $riwayatTransaksi->total() }}</strong> transaksi ditemukan
                 </div>
             </div>
@@ -506,7 +612,7 @@
 
                                 {{-- Metode Pengambilan --}}
                                 <td class="py-3.5 px-4 whitespace-nowrap text-xs text-slate-600">
-                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700">
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 text-slate-700">
                                         @if(stripos($trx->metode_pengambilan, 'antar') !== false || stripos($trx->metode_pengambilan, 'delivery') !== false)
                                             <svg class="w-3.5 h-3.5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
@@ -532,13 +638,13 @@
                                             default         => 'bg-slate-100 text-slate-800 border-slate-200'
                                         };
                                     @endphp
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border {{ $statusClass }}">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold border {{ $statusClass }}">
                                         {{ $trx->status_laundry ?? 'Diproses' }}
                                     </span>
                                 </td>
 
                                 {{-- Total Biaya Transaksi --}}
-                                <td class="py-3.5 px-4 whitespace-nowrap text-right font-bold text-slate-900">
+                                <td class="py-3.5 px-4 whitespace-nowrap text-right font-bold text-slate-900 whitespace-nowrap">
                                     Rp {{ number_format($trx->total_harga_transaksi ?? 0, 0, ',', '.') }}
                                 </td>
 
@@ -572,7 +678,7 @@
                             <tr>
                                 <td colspan="9" class="py-12 px-4 text-center">
                                     <div class="max-w-sm mx-auto">
-                                        <div class="w-14 h-14 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3">
+                                        <div class="w-14 h-14 rounded-lg bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3">
                                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                             </svg>
@@ -635,3 +741,13 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
