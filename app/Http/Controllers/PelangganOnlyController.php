@@ -25,6 +25,17 @@ class PelangganOnlyController extends Controller
         return Pelanggan::find($pelangganId);
     }
 
+    public function profil()
+    {
+        $pelanggan = $this->authenticatedPelanggan();
+
+        if (!$pelanggan) {
+            return redirect()->route('login')->with('error', 'Silakan login sebagai pelanggan terlebih dahulu.');
+        }
+
+        return view('PelangganOnly.ProfilView', compact('pelanggan'));
+    }
+
     public function status(Request $request)
     {
         $pelangganId = session('pelanggan_id');
