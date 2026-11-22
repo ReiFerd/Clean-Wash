@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.PelangganOnly')
 
 @section('title', 'Status Laundry Saya - CleanWash')
 

@@ -1,4 +1,4 @@
-@extends('PelangganOnly')
+@extends('layout.PelangganOnly')
 @section('title', 'Buat Pesanan - CleanWash')
 
 @section('content')
