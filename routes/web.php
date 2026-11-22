@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\StatusCekController;
 use App\Http\Controllers\PelangganController;
@@ -8,9 +9,7 @@ use App\Http\Controllers\LaporanController;
 use Illuminate\Support\Facades\Route;
 
 // Public page
-Route::get('/', function () {
-    return view('dashboard');
-});
+Route::get('/', [DashboardController::class, 'index']);
 
 // Fitur Auth
 Route::get('/login', [AuthController::class, 'showlogin'])->name('login');
@@ -31,5 +30,5 @@ Route::get('/status-cek/{id?}', [StatusCekController::class, 'index'])->name('st
 Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
 
 // Fitur Dashboard & CRUD Pemesanan Laundry
-Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::resource('pemesanan', \App\Http\Controllers\PemesananController::class);
