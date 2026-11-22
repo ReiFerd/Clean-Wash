@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\StatusCekController;
 use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\PelangganOnlyController;
 use App\Http\Controllers\LaporanController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,9 @@ Route::resource('pelanggan', PelangganController::class);
 Route::get('/status', [StatusController::class, 'index'])->name('status.index');
 Route::put('/status/{id_transaksi?}', [StatusController::class, 'update'])->name('status.update');
 Route::get('/status-cek/{id?}', [StatusCekController::class, 'index'])->name('status.cek');
+
+// Fitur Khusus Pelanggan Login
+Route::get('/pelanggan/status', [PelangganOnlyController::class, 'status'])->name('pelanggan.status');
 
 // Fitur Laporan Pendapatan dan Transaksi (Arya)
 Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
