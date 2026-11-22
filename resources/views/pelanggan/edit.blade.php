@@ -36,12 +36,6 @@
                     @error('username_pelanggan') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Password Baru <small class="text-muted">(Kosongkan jika tidak ingin mengganti password)</small></label>
-                    <input type="password" name="password_pelanggan" class="form-control @error('password_pelanggan') is-invalid @enderror" maxlength="20">
-                    @error('password_pelanggan') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                </div>
-
                 <div class="d-flex gap-2">
                     <button type="submit" class="btn btn-primary">Perbarui</button>
                     <a href="{{ route('pelanggan.index') }}" class="btn btn-secondary">Kembali</a>

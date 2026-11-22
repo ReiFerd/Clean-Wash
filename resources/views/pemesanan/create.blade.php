@@ -1,4 +1,4 @@
-@extends('layout.cleanwash')
+@extends('layout.app')
 @section('title', 'Buat Pesanan - CleanWash')
 
 @section('content')

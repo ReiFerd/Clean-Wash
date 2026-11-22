@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Pelanggan extends Model
+class Pelanggan extends Authenticatable
 {
     protected $table = 'pelanggan';
     protected $primaryKey = 'id_pelanggan';
@@ -17,10 +17,16 @@ class Pelanggan extends Model
         'username_pelanggan',
         'password_pelanggan',
     ];
+
     protected $hidden = [
         'password_pelanggan',
     ];
-    // Relasi: satu pelanggan bisa memiliki banyak transaksi
+
+    public function getAuthPassword(): string
+    {
+        return $this->password_pelanggan;
+    }
+
     public function transaksi()
     {
         return $this->hasMany(Transaksi::class, 'id_pelanggan', 'id_pelanggan');

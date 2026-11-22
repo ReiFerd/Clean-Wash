@@ -13,9 +13,7 @@ class DashboardController extends Controller
             'tagline' => 'Sistem Informasi Manajemen Laundry',
             'deskripsi' => 'Layanan pencucian pakaian profesional dengan pencatatan transaksi transparan, pemantauan status pengerjaan secara real-time, serta pelayanan cepat dan higienis.',
             'jam_operasional' => 'Senin - Minggu, 07.00 - 21.00 WIB',
-            'estimasi_reguler' => '2 - 3 Hari Kerja',
-            'estimasi_express' => '6 - 24 Jam Selesai',
-            'alamat' => 'Jl. Kebersihan No. 12, Kota Anda',
+            'alamat' => 'Jl. Multo No. 12, Kota HarumWangi',
             'telepon' => '0812-3456-7890',
         ];
 
@@ -37,34 +35,25 @@ class DashboardController extends Controller
             ],
             [
                 'judul' => 'Pilihan Layanan Fleksibel',
-                'deskripsi' => 'Tersedia layanan reguler, kilat (express), cuci kering, setrika saja, hingga perawatan khusus.',
+                'deskripsi' => 'Tersedia layanan cuci kering, cuci setrika, setrika saja',
                 'ikon' => 'sparkle',
             ],
         ];
 
         $layananUmum = [
             [
-                'nama' => 'Cuci Komplit Reguler',
+                'nama' => 'Cuci Kering',
                 'keterangan' => 'Cuci, kering, setrika rapi, dan wangi tahan lama.',
-                'estimasi' => '2 - 3 Hari',
                 'badge' => 'Populer',
             ],
             [
-                'nama' => 'Cuci Komplit Express',
+                'nama' => 'Cuci Setrika',
                 'keterangan' => 'Prioritas pengerjaan cepat untuk kebutuhan mendesak.',
-                'estimasi' => '1 Hari / Kilat',
                 'badge' => 'Cepat',
             ],
             [
-                'nama' => 'Cuci Kering Lipat',
-                'keterangan' => 'Dicuci bersih, dikeringkan mesin, dan dilipat rapi tanpa setrika.',
-                'estimasi' => '1 - 2 Hari',
-                'badge' => 'Hemat',
-            ],
-            [
-                'nama' => 'Setrika & Pewangi',
+                'nama' => 'Setrika',
                 'keterangan' => 'Khusus penyetrikaan uap agar pakaian licin, rapi, dan harum.',
-                'estimasi' => '1 Hari',
                 'badge' => 'Rapi',
             ],
         ];
@@ -82,7 +71,7 @@ class DashboardController extends Controller
             ],
             [
                 'langkah' => '03',
-                'judul' => 'Kering & Setrika',
+                'judul' => 'Setrika',
                 'deskripsi' => 'Pengeringan optimal dilanjutkan penyetrikaan rapi serta pemberian pewangi.',
             ],
             [

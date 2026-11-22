@@ -106,7 +106,6 @@ class PelangganController extends Controller
             'alamat'             => 'required|string|max:250',
             'no_telepon'         => 'required|numeric|digits_between:10,15|unique:pelanggan,no_telepon,' . $id . ',id_pelanggan',
             'username_pelanggan' => 'required|string|max:20|unique:pelanggan,username_pelanggan,' . $id . ',id_pelanggan',
-            'password_pelanggan' => 'nullable|string|min:4|max:20',
         ], [
             'nama_pelanggan.required'     => 'Nama pelanggan wajib diisi.',
             'alamat.required'             => 'Alamat wajib diisi.',
@@ -116,8 +115,6 @@ class PelangganController extends Controller
             'username_pelanggan.required' => 'Username wajib diisi.',
             'username_pelanggan.max'      => 'Username maksimal 20 karakter.',
             'username_pelanggan.unique'   => 'Username sudah digunakan.',
-            'password_pelanggan.min'      => 'Password minimal 4 karakter.',
-            'password_pelanggan.max'      => 'Password maksimal 20 karakter.',
         ]);
 
         $dataUpdate = [
@@ -126,10 +123,6 @@ class PelangganController extends Controller
             'no_telepon'         => $request->no_telepon,
             'username_pelanggan' => $request->username_pelanggan,
         ];
-
-        if ($request->filled('password_pelanggan')) {
-            $dataUpdate['password_pelanggan'] = $request->password_pelanggan;
-        }
 
         $pelanggan->update($dataUpdate);
 

@@ -188,7 +188,7 @@ main td, main th { padding: 14px 16px; }
                 {{-- Logo & Brand --}}
                 <div class="flex items-center gap-3">
                     <div>
-                        <a href="{{ url('/') }}" class="text-xl font-bold tracking-tight bg-gradient-to-r from-sky-700 to-cyan-600 bg-clip-text text-transparent">
+                        <a href="{{ url('#') }}" class="text-xl font-bold tracking-tight bg-gradient-to-r from-sky-400 to-cyan-300 bg-clip-text text-transparent">
                             Clean-Wash
                         </a>
                         <p class="text-[11px] text-slate-300 font-medium">Sistem Informasi Manajemen Laundry</p>
@@ -203,11 +203,11 @@ main td, main th { padding: 14px 16px; }
                     <a href="{{ route('pelanggan.index') }}" class="px-3 py-2 rounded-lg text-slate-100 hover:text-white hover:bg-white/10 transition">
                         Data Pelanggan
                     </a>
-                    <a href="{{ route('status.index') }}" class="px-3 py-2 rounded-lg text-slate-100 hover:text-white hover:bg-white/10 transition">
-                        Update Status
+                    <a href="{{ route('pemesanan.index') }}" class="px-3 py-2 rounded-lg text-slate-100 hover:text-white hover:bg-white/10 transition">
+                        Pemesanan
                     </a>
                     <a href="{{ route('status.cek') }}" class="px-3 py-2 rounded-lg text-slate-100 hover:text-white hover:bg-white/10 transition">
-                        Cek Status
+                        Status
                     </a>
                     <a href="{{ route('laporan.index') }}" class="px-4 py-2 rounded-xl bg-white/15 text-white font-semibold border border-white/20 shadow-none">
                         Laporan Keuangan
@@ -220,7 +220,7 @@ main td, main th { padding: 14px 16px; }
         <div class="md:hidden flex overflow-x-auto px-4 py-2 bg-[#0b2545] border-t border-slate-700 text-xs font-medium gap-2">
             <a href="{{ url('/') }}" class="px-3 py-1.5 rounded-md text-slate-100 whitespace-nowrap">Beranda</a>
             <a href="{{ route('pelanggan.index') }}" class="px-3 py-1.5 rounded-md text-slate-100 whitespace-nowrap">Pelanggan</a>
-            <a href="{{ route('status.index') }}" class="px-3 py-1.5 rounded-md text-slate-100 whitespace-nowrap">Update Status</a>
+            <a href="{{ route('pemesanan.index') }}" class="px-3 py-1.5 rounded-md text-slate-100 whitespace-nowrap">Update Status</a>
             <a href="{{ route('status.cek') }}" class="px-3 py-1.5 rounded-md text-slate-100 whitespace-nowrap">Cek Status</a>
             <a href="{{ route('laporan.index') }}" class="px-3 py-1.5 rounded-md bg-sky-600 text-white font-semibold whitespace-nowrap">Laporan</a>
         </div>
@@ -287,7 +287,7 @@ main td, main th { padding: 14px 16px; }
                         <svg class="w-3.5 h-3.5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                         </svg>
-                        <span>Akumulasi SUM(total_harga)</span>
+                        <span>Akumulasi pendapatan kotor</span>
                     </p>
                 </div>
             </div>
@@ -741,13 +741,3 @@ main td, main th { padding: 14px 16px; }
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-

@@ -1,5 +1,7 @@
 @extends('layout.app')
 
+@section('title', 'Data Pelanggan - CleanWash')
+
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -82,3 +84,4 @@
                 e.preventDefault();
             }
         });
+@endsection
