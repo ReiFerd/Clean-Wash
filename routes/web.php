@@ -23,6 +23,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Fitur Khusus Pelanggan Login
 Route::get('/status-saya', [PelangganOnlyController::class, 'status'])->name('pelanggan.status');
+Route::get('/pesan-laundry', [PelangganOnlyController::class, 'createPemesanan'])->name('pelanggan.pemesanan.create');
+Route::post('/pesan-laundry', [PelangganOnlyController::class, 'storePemesanan'])->name('pelanggan.pemesanan.store');
 
 // Fitur CRUD Pelanggan (May)
 Route::resource('pelanggan', PelangganController::class);

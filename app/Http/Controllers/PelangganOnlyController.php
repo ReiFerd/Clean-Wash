@@ -2,12 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
+use App\Models\DetailTransaksi;
+use App\Models\Layanan;
 use App\Models\Pelanggan;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PelangganOnlyController extends Controller
 {
+    private array $metodeList = ['Ambil Sendiri', 'Diantar'];
+
+    private function authenticatedPelanggan()
+    {
+        $pelangganId = session('pelanggan_id');
+
+        if (!$pelangganId || session('role') !== 'pelanggan') {
+            return null;
+        }
+
+        return Pelanggan::find($pelangganId);
+    }
+
     public function status(Request $request)
     {
         $pelangganId = session('pelanggan_id');
@@ -56,5 +73,64 @@ class PelangganOnlyController extends Controller
         }
 
         return view('PelangganOnly.StatusView', compact('pelanggan', 'transaksi', 'timeline'));
+    }
+
+    public function createPemesanan()
+    {
+        $pelanggan = $this->authenticatedPelanggan();
+
+        if (!$pelanggan) {
+            return redirect()->route('login')->with('error', 'Silakan login sebagai pelanggan terlebih dahulu.');
+        }
+
+        $layanans   = Layanan::orderBy('nama_layanan')->get();
+        $metodeList = $this->metodeList;
+
+        return view('PelangganOnly.PemesananView', compact('pelanggan', 'layanans', 'metodeList'));
+    }
+
+    public function storePemesanan(Request $request)
+    {
+        $pelanggan = $this->authenticatedPelanggan();
+
+        if (!$pelanggan) {
+            return redirect()->route('login')->with('error', 'Silakan login sebagai pelanggan terlebih dahulu.');
+        }
+
+        $request->validate([
+            'id_layanan'         => 'required|exists:layanan,id_layanan',
+            'berat_cucian'       => 'required|numeric|min:0.1|max:999',
+            'tanggal_transaksi'  => 'required|date',
+            'metode_pengambilan' => 'required|in:Ambil Sendiri,Diantar',
+        ]);
+
+        $admin = Admin::first();
+        if (!$admin) {
+            return back()->withInput()->withErrors(['id_layanan' => 'Data admin belum tersedia. Silakan hubungi admin.']);
+        }
+
+        // total dihitung ulang di server supaya tidak bisa dimanipulasi dari browser
+        $layanan = Layanan::findOrFail($request->id_layanan);
+        $total   = round($request->berat_cucian * $layanan->harga_per_kg, 2);
+
+        DB::transaction(function () use ($request, $pelanggan, $admin, $total) {
+            $transaksi = Transaksi::create([
+                'id_pelanggan'       => $pelanggan->id_pelanggan,
+                'id_admin'           => $admin->id_admin,
+                'tanggal_transaksi'  => $request->tanggal_transaksi,
+                'status_laundry'     => 'Menunggu',
+                'metode_pengambilan' => $request->metode_pengambilan,
+            ]);
+
+            DetailTransaksi::create([
+                'id_transaksi' => $transaksi->id_transaksi,
+                'id_layanan'   => $request->id_layanan,
+                'berat_cucian' => $request->berat_cucian,
+                'total_harga'  => $total,
+            ]);
+        });
+
+        return redirect()->route('pelanggan.status')
+                         ->with('success', 'Pesanan laundry berhasil dibuat!');
     }
 }
