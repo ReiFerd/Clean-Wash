@@ -133,4 +133,22 @@ class PelangganOnlyController extends Controller
         return redirect()->route('pelanggan.status')
                          ->with('success', 'Pesanan laundry berhasil dibuat!');
     }
+
+    public function riwayat()
+    {
+        $pelanggan = $this->authenticatedPelanggan();
+
+        if (!$pelanggan) {
+            return redirect()->route('login')->with('error', 'Silakan login sebagai pelanggan terlebih dahulu.');
+        }
+
+        $riwayatTransaksi = Transaksi::with(['detailTransaksi.layanan'])
+            ->where('id_pelanggan', $pelanggan->id_pelanggan)
+            ->where('status_laundry', 'Selesai')
+            ->orderByDesc('tanggal_transaksi')
+            ->orderByDesc('id_transaksi')
+            ->get();
+
+        return view('PelangganOnly.RiwayatView', compact('pelanggan', 'riwayatTransaksi'));
+    }
 }
