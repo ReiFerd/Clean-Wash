@@ -24,7 +24,7 @@
                     </div>
                     <div>
                         <h5 class="mb-1 fw-bold text-dark">{{ $pelanggan->nama_pelanggan }}</h5>
-                        <p class="mb-0 text-muted small">@{{ $pelanggan->username_pelanggan }}</p>
+                        <p class="mb-0 text-muted small">{{ $pelanggan->username_pelanggan }}</p>
                     </div>
                 </div>
 

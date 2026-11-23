@@ -94,10 +94,10 @@
                     <a href="{{ route('pelanggan.status') }}" class="cw-nav-link {{ request()->routeIs('pelanggan.status') ? 'active' : '' }}">
                         Status
                     </a>
-                    <a href="#" class="cw-nav-link {{ request()->routeIs('pelanggan.riwayat') ? 'active' : '' }}">
+                    <a href="{{ route('pelanggan.riwayat') }}" class="cw-nav-link {{ request()->routeIs('pelanggan.riwayat') ? 'active' : '' }}">
                         Riwayat
                     </a>
-                    <a href="#" class="cw-nav-link {{ request()->routeIs('pelanggan.profil*') ? 'active' : '' }}">
+                    <a href="{{ route('pelanggan.profil') }}" class="cw-nav-link {{ request()->routeIs('pelanggan.profil*') ? 'active' : '' }}">
                         Profil
                     </a>
 
@@ -122,10 +122,10 @@
             <a href="{{ route('pelanggan.status') }}" class="cw-mobile-link {{ request()->routeIs('pelanggan.status') ? 'active' : '' }}">
                 Status
             </a>
-            <a href="#" class="cw-mobile-link {{ request()->routeIs('pelanggan.riwayat') ? 'active' : '' }}">
+            <a href="{{ route('pelanggan.riwayat') }}" class="cw-mobile-link {{ request()->routeIs('pelanggan.riwayat') ? 'active' : '' }}">
                 Riwayat
             </a>
-            <a href="#" class="cw-mobile-link {{ request()->routeIs('pelanggan.profil*') ? 'active' : '' }}">
+            <a href="{{ route('pelanggan.profil') }}" class="cw-mobile-link {{ request()->routeIs('pelanggan.profil*') ? 'active' : '' }}">
                 Profil
             </a>
             <form action="{{ route('logout') }}" method="POST" class="d-inline ms-auto">
