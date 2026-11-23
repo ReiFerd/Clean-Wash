@@ -85,7 +85,7 @@
 
                 {{-- Navigasi Desktop --}}
                 <nav class="d-none d-md-flex align-items-center gap-1">
-                    <a href="#" class="cw-nav-link {{ request()->routeIs('pelanggan.home') ? 'active' : '' }}">
+                    <a href="{{ url('/') }}" class="cw-nav-link {{ request()->routeIs('pelanggan.home') ? 'active' : '' }}">
                         Beranda
                     </a>
                     <a href="{{ route('pelanggan.pemesanan.create') }}" class="cw-nav-link {{ request()->routeIs('pelanggan.pemesanan*') ? 'active' : '' }}">
@@ -113,7 +113,7 @@
 
         {{-- Mobile Navigasi --}}
         <div class="d-flex d-md-none align-items-center overflow-auto px-3 py-2 cw-mobile-bar gap-2">
-            <a href="#" class="cw-mobile-link {{ request()->routeIs('pelanggan.home') ? 'active' : '' }}">
+            <a href="{{ url('/') }}" class="cw-mobile-link {{ request()->routeIs('pelanggan.home') ? 'active' : '' }}">
                 Beranda
             </a>
             <a href="{{ route('pelanggan.pemesanan.create') }}" class="cw-mobile-link {{ request()->routeIs('pelanggan.pemesanan*') ? 'active' : '' }}">
