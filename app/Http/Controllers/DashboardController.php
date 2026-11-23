@@ -13,7 +13,7 @@ class DashboardController extends Controller
             'tagline' => 'Sistem Informasi Manajemen Laundry',
             'deskripsi' => 'Layanan pencucian pakaian profesional dengan pencatatan transaksi transparan, pemantauan status pengerjaan secara real-time, serta pelayanan cepat dan higienis.',
             'jam_operasional' => 'Senin - Minggu, 07.00 - 21.00 WIB',
-            'alamat' => 'Jl. Multo No. 12, Kota HarumWangi',
+            'alamat' => 'Jl. Bersih No. 12, Kota HarumWangi',
             'telepon' => '0812-3456-7890',
         ];
 
@@ -35,7 +35,7 @@ class DashboardController extends Controller
             ],
             [
                 'judul' => 'Pilihan Layanan Fleksibel',
-                'deskripsi' => 'Tersedia layanan cuci kering, cuci setrika, setrika saja',
+                'deskripsi' => 'Tersedia layanan cuci kering, cuci setrika, setrika',
                 'ikon' => 'sparkle',
             ],
         ];
@@ -43,17 +43,17 @@ class DashboardController extends Controller
         $layananUmum = [
             [
                 'nama' => 'Cuci Kering',
-                'keterangan' => 'Cuci, kering, setrika rapi, dan wangi tahan lama.',
-                'badge' => 'Populer',
+                'keterangan' => 'Pencucian bersih hingga pengeringan optimal dan lipat rapi tanpa proses setrika.',
+                'badge' => 'Praktis',
             ],
             [
                 'nama' => 'Cuci Setrika',
-                'keterangan' => 'Prioritas pengerjaan cepat untuk kebutuhan mendesak.',
-                'badge' => 'Cepat',
+                'keterangan' => 'Paket lengkap mulai dari cuci bersih, pengeringan, hingga setrika rapi dan wangi tahan lama.',
+                'badge' => 'Populer',
             ],
             [
                 'nama' => 'Setrika',
-                'keterangan' => 'Khusus penyetrikaan uap agar pakaian licin, rapi, dan harum.',
+                'keterangan' => 'Khusus penyetrikaan uap untuk pakaian yang sudah bersih agar licin, rapi, dan harum.',
                 'badge' => 'Rapi',
             ],
         ];

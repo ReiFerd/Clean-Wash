@@ -182,17 +182,9 @@
                     <h1 class="display-6 fw-bold mb-3">
                         Solusi Cuci Bersih, Rapi, dan Terpantau dengan {{ $infoLaundry['nama'] }}
                     </h1>
-                    <p class="mb-4 text-light opacity-75" style="max-width: 640px;">
+                    <p class="mb-0 text-light opacity-75" style="max-width: 640px;">
                         {{ $infoLaundry['deskripsi'] }}
                     </p>
-                    <div class="d-flex flex-wrap gap-2">
-                        <a href="{{ route('status.cek') }}" class="btn btn-info text-dark fw-semibold px-4 py-2 rounded-3">
-                            Cek Status Laundry
-                        </a>
-                        <a href="{{ route('login') }}" class="btn btn-outline-light fw-semibold px-4 py-2 rounded-3">
-                            Masuk ke Sistem
-                        </a>
-                    </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="bg-white bg-opacity-10 border border-white border-opacity-25 rounded-4 p-3">
@@ -203,12 +195,12 @@
                                 <span class="fw-semibold text-end">{{ $infoLaundry['jam_operasional'] }}</span>
                             </li>
                             <li class="d-flex justify-content-between py-2 border-bottom border-white border-opacity-10">
-                                <span class="opacity-75">Reguler</span>
-                                <span class="fw-semibold">{{ $infoLaundry['estimasi_reguler'] }}</span>
+                                <span class="opacity-75">Telepon</span>
+                                <span class="fw-semibold text-end">{{ $infoLaundry['telepon'] }}</span>
                             </li>
                             <li class="d-flex justify-content-between pt-2">
-                                <span class="opacity-75">Express</span>
-                                <span class="fw-semibold">{{ $infoLaundry['estimasi_express'] }}</span>
+                                <span class="opacity-75">Alamat</span>
+                                <span class="fw-semibold text-end">{{ $infoLaundry['alamat'] }}</span>
                             </li>
                         </ul>
                     </div>
@@ -262,19 +254,13 @@
             </div>
             <div class="row g-3">
                 @foreach($layananUmum as $layanan)
-                    <div class="col-md-6 col-lg-3">
-                        <div class="cw-card p-4 d-flex flex-column justify-content-between">
-                            <div>
-                                <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
-                                    <h3 class="h6 fw-bold text-dark mb-0">{{ $layanan['nama'] }}</h3>
-                                    <span class="cw-service-pill">{{ $layanan['badge'] }}</span>
-                                </div>
-                                <p class="small text-secondary mb-3">{{ $layanan['keterangan'] }}</p>
+                    <div class="col-md-4">
+                        <div class="cw-card p-4">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                <h3 class="h6 fw-bold text-dark mb-0">{{ $layanan['nama'] }}</h3>
+                                <span class="cw-service-pill">{{ $layanan['badge'] }}</span>
                             </div>
-                            <div class="pt-2 border-top d-flex justify-content-between align-items-center small">
-                                <span class="text-muted">Estimasi</span>
-                                <span class="fw-semibold text-primary">{{ $layanan['estimasi'] }}</span>
-                            </div>
+                            <p class="small text-secondary mb-0">{{ $layanan['keterangan'] }}</p>
                         </div>
                     </div>
                 @endforeach
@@ -302,29 +288,24 @@
             </div>
 
             <div class="col-lg-4">
-                <div class="cw-info-panel h-100 d-flex flex-column justify-content-between">
-                    <div>
-                        <span class="badge bg-info text-dark mb-3">Informasi Outlet</span>
-                        <h2 class="h5 fw-bold mb-2">Butuh Bantuan atau Cek Cucian?</h2>
-                        <p class="small text-light opacity-75 mb-4">
-                            Hubungi kami atau pantau status laundry Anda secara langsung melalui halaman cek status.
-                        </p>
-                        <div class="small mb-3">
-                            <div class="text-info fw-semibold">Alamat</div>
-                            <div>{{ $infoLaundry['alamat'] }}</div>
-                        </div>
-                        <div class="small mb-3">
-                            <div class="text-info fw-semibold">Telepon / WhatsApp</div>
-                            <div>{{ $infoLaundry['telepon'] }}</div>
-                        </div>
-                        <div class="small mb-4">
-                            <div class="text-info fw-semibold">Jam Operasional</div>
-                            <div>{{ $infoLaundry['jam_operasional'] }}</div>
-                        </div>
+                <div class="cw-info-panel h-100">
+                    <span class="badge bg-info text-dark mb-3">Informasi Outlet</span>
+                    <h2 class="h5 fw-bold mb-2">Butuh Bantuan atau Informasi Lebih Lanjut?</h2>
+                    <p class="small text-light opacity-75 mb-4">
+                        Hubungi kami atau kunjungi langsung outlet {{ $infoLaundry['nama'] }} pada jam operasional berikut.
+                    </p>
+                    <div class="small mb-3">
+                        <div class="text-info fw-semibold">Alamat</div>
+                        <div>{{ $infoLaundry['alamat'] }}</div>
                     </div>
-                    <a href="{{ route('status.cek') }}" class="btn btn-info text-dark fw-semibold w-100 rounded-3">
-                        Cek Status Cucian Sekarang
-                    </a>
+                    <div class="small mb-3">
+                        <div class="text-info fw-semibold">Telepon / WhatsApp</div>
+                        <div>{{ $infoLaundry['telepon'] }}</div>
+                    </div>
+                    <div class="small mb-0">
+                        <div class="text-info fw-semibold">Jam Operasional</div>
+                        <div>{{ $infoLaundry['jam_operasional'] }}</div>
+                    </div>
                 </div>
             </div>
         </section>

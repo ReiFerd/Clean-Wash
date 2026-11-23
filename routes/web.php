@@ -11,8 +11,7 @@ use App\Http\Controllers\StatusController;
 use Illuminate\Support\Facades\Route;
 
 // Public page
-Route::get('/', [DashboardController::class, 'index']);
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 // Fitur Auth
 Route::get('/login', [AuthController::class, 'showlogin'])->name('login');
