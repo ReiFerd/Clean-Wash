@@ -91,7 +91,7 @@
                     <a href="{{ route('pelanggan.index') }}" class="cw-nav-link {{ request()->routeIs('pelanggan.*') ? 'active' : '' }}">
                         Daftar Pelanggan
                     </a>
-                    <a href="{{ route('pemesanan.index') }}" class="cw-nav-link {{ request()->routeIs('laporan.*') ? 'active' : '' }}">
+                    <a href="{{ route('pemesanan.index') }}" class="cw-nav-link {{ request()->routeIs('pemesanan.*') ? 'active' : '' }}">
                         Pesanan
                     </a>
                     <a href="{{ route('status.cek') }}" class="cw-nav-link {{ request()->routeIs('status.cek') ? 'active' : '' }}">

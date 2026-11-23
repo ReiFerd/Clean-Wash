@@ -46,7 +46,7 @@ class AuthController extends Controller
                 'role'         => 'pelanggan',
             ]);
 
-            return redirect('/');
+            return redirect()->route('pelanggan.status');
         }
 
         // Jika tidak cocok di kedua tabel
@@ -92,7 +92,7 @@ class AuthController extends Controller
             'role'         => 'pelanggan',
         ]);
 
-        return redirect('/');
+        return redirect()->route('pelanggan.status');
     }
 
     public function logout(Request $request)
