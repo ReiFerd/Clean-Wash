@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PelangganOnlyController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\StatusCekController;
 use App\Http\Controllers\StatusController;
@@ -21,10 +22,13 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Fitur Khusus Pelanggan Login
 Route::middleware(['cek.role:pelanggan'])->group(function () {
+    Route::get('/beranda-pelanggan', [PelangganOnlyController::class, 'home'])->name('pelanggan.home');
     Route::get('/status-saya', [PelangganOnlyController::class, 'status'])->name('pelanggan.status');
     Route::get('/pesan-laundry', [PelangganOnlyController::class, 'createPemesanan'])->name('pelanggan.pemesanan.create');
     Route::post('/pesan-laundry', [PelangganOnlyController::class, 'storePemesanan'])->name('pelanggan.pemesanan.store');
     Route::get('/riwayat-saya', [PelangganOnlyController::class, 'riwayat'])->name('pelanggan.riwayat');
+    Route::get('/pembayaran-saya', [PembayaranController::class, 'index'])->name('pelanggan.pembayaran');
+    Route::post('/pembayaran-saya/{id_pembayaran}', [PembayaranController::class, 'konfirmasi'])->name('pelanggan.pembayaran.konfirmasi');
     Route::get('/profil-saya', [PelangganOnlyController::class, 'profil'])->name('pelanggan.profil');
 });
 

@@ -26,6 +26,7 @@ class AuthController extends Controller
 
         if ($admin && $request->password === $admin->password_admin) {
             $request->session()->regenerate();
+
             session([
                 'admin_id' => $admin->id_admin ?? $admin->id,
                 'nama'     => $admin->nama_admin,
@@ -36,20 +37,23 @@ class AuthController extends Controller
         }
 
         // Cek ke tabel Pelanggan
-        $pembeli = Pelanggan::where('username_pelanggan', $request->username)->first();
+        $pelanggan = Pelanggan::where(
+            'username_pelanggan',
+            $request->username
+        )->first();
 
-        if ($pembeli && $request->password === $pembeli->password_pelanggan) {
+        if ($pelanggan && $request->password === $pelanggan->password_pelanggan) {
             $request->session()->regenerate();
+
             session([
-                'pelanggan_id' => $pembeli->id_pelanggan ?? $pembeli->id,
-                'nama'         => $pembeli->nama_pelanggan,
+                'pelanggan_id' => $pelanggan->id_pelanggan,
+                'nama'         => $pelanggan->nama_pelanggan,
                 'role'         => 'pelanggan',
             ]);
 
-            return redirect('/');
+            return redirect()->route('pelanggan.home');
         }
 
-        // Jika tidak cocok di kedua tabel
         return back()->withErrors([
             'username' => 'Username atau password salah.',
         ])->onlyInput('username');
@@ -63,36 +67,39 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'nama_pelanggan'     => 'required|string|max:100',
-            'alamat'             => 'required|string|max:250',
-            'no_telepon'         => 'required|string|max:15',
+            'nama_pelanggan' => 'required|string|max:100',
+            'alamat' => 'required|string|max:250',
+            'no_telepon' => 'required|string|max:15',
+
             'username_pelanggan' => [
                 'required',
                 'string',
                 'max:20',
-                Rule::unique(Pelanggan::class, 'username_pelanggan'),
-                Rule::unique(Admin::class, 'username_admin'), // Mencegah bentrok dengan username admin
+                Rule::unique('pelanggan', 'username_pelanggan'),
+                Rule::unique('admin', 'username_admin'),
             ],
+
             'password_pelanggan' => 'required|string|min:6',
         ]);
 
         $pelanggan = Pelanggan::create([
-            'nama_pelanggan'     => $request->nama_pelanggan,
-            'alamat'             => $request->alamat,
-            'no_telepon'         => $request->no_telepon,
+            'nama_pelanggan' => $request->nama_pelanggan,
+            'alamat' => $request->alamat,
+            'no_telepon' => $request->no_telepon,
             'username_pelanggan' => $request->username_pelanggan,
             'password_pelanggan' => $request->password_pelanggan,
         ]);
 
         // Otomatis login setelah berhasil register
         $request->session()->regenerate();
+
         session([
-            'pelanggan_id' => $pelanggan->id_pelanggan ?? $pelanggan->id,
-            'nama'         => $pelanggan->nama_pelanggan,
-            'role'         => 'pelanggan',
+            'pelanggan_id' => $pelanggan->id_pelanggan,
+            'nama' => $pelanggan->nama_pelanggan,
+            'role' => 'pelanggan',
         ]);
 
-        return redirect('/');
+        return redirect()->route('pelanggan.home');
     }
 
     public function logout(Request $request)
