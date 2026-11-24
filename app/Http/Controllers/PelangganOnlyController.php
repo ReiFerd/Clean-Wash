@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\DetailTransaksi;
 use App\Models\Layanan;
 use App\Models\Pelanggan;
+use App\Models\Pembayaran;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -139,8 +140,13 @@ class PelangganOnlyController extends Controller
                 'berat_cucian' => $request->berat_cucian,
                 'total_harga'  => $total,
             ]);
+            Pembayaran::create([
+                'id_transaksi' => $transaksi->id_transaksi,
+                'metode_pembayaran' => 'Belum Dipilih',
+                'tanggal_pembayaran' => null,
+                'status_pembayaran' => 'belum_dibayar',
+            ]);
         });
-
         return redirect()->route('pelanggan.status')
                          ->with('success', 'Pesanan laundry berhasil dibuat!');
     }
@@ -161,5 +167,17 @@ class PelangganOnlyController extends Controller
             ->get();
 
         return view('PelangganOnly.RiwayatView', compact('pelanggan', 'riwayatTransaksi'));
+    }
+
+    public function home()
+    {
+        $pelanggan = $this->authenticatedPelanggan();
+
+        if (!$pelanggan) {
+            return redirect()->route('login')
+                ->with('error', 'Silakan login sebagai pelanggan terlebih dahulu.');
+        }
+
+        return view('PelangganOnly.HomeView', compact('pelanggan'));
     }
 }

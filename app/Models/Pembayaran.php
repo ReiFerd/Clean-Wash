@@ -14,9 +14,10 @@ class Pembayaran extends Model
         'id_transaksi',
         'metode_pembayaran',
         'tanggal_pembayaran',
+        'status_pembayaran',
+        'bukti_pembayaran',
     ];
 
-    // Relasi: satu pembayaran dimiliki oleh satu transaksi
     public function transaksi()
     {
         return $this->belongsTo(Transaksi::class, 'id_transaksi', 'id_transaksi');
