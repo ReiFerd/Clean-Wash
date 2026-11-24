@@ -100,11 +100,8 @@ class AuthController extends Controller
             'role' => 'pelanggan',
         ]);
 
-<<<<<<< HEAD
-        return redirect()->route('pelanggan.status');
-=======
         return redirect()->route('pelanggan.home');
->>>>>>> 06d811f48cb8a03aeb9147ee60ccff2cdc805d9e
+
     }
 
     public function logout(Request $request)
