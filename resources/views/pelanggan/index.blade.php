@@ -9,7 +9,6 @@
     <div class="card shadow-sm">
         <div class="card-header bg-white d-flex justify-content-between align-items-center">
             <h5 class="mb-0 fw-bold">Data Pelanggan - CleanWash</h5>
-            <a href="{{ route('pelanggan.create') }}" class="btn btn-primary btn-sm">+ Tambah Pelanggan</a>
         </div>
         <div class="card-body">
             @if(session('success'))
@@ -79,9 +78,12 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    $(document).ready(function() {$('.form-hapus').on('submit', function(e) {
+    $(document).ready(function() {
+        $('.form-hapus').on('submit', function(e) {
             if (!confirm('Apakah Anda yakin ingin menghapus data pelanggan ini?')) {
                 e.preventDefault();
             }
         });
+    });
+</script>
 @endsection

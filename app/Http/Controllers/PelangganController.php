@@ -38,65 +38,23 @@ class PelangganController extends Controller
         return view('pelanggan.index', compact('pelanggans', 'keyword'));
     }
 
-    // 2. Form Tambah Pelanggan
-    public function create()
-    {
-        return view('pelanggan.create');
-    }
+    
 
-    // 3. Simpan Data Pelanggan Baru
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nama_pelanggan'     => 'required|string|max:100',
-            'alamat'             => 'required|string|max:250',
-            'no_telepon'         => 'required|numeric|digits_between:10,15|unique:pelanggan,no_telepon',
-            'username_pelanggan' => 'required|string|max:20|unique:pelanggan,username_pelanggan',
-            'password_pelanggan' => 'required|string|min:4|max:20',
-        ], [
-            'nama_pelanggan.required'     => 'Nama pelanggan wajib diisi.',
-            'nama_pelanggan.max'          => 'Nama pelanggan maksimal 100 karakter.',
-            'alamat.required'             => 'Alamat wajib diisi.',
-            'alamat.max'                  => 'Alamat maksimal 250 karakter.',
-            'no_telepon.required'         => 'Nomor telepon wajib diisi.',
-            'no_telepon.numeric'          => 'Nomor telepon harus berupa angka.',
-            'no_telepon.digits_between'   => 'Nomor telepon harus 10 sampai 15 digit.',
-            'no_telepon.unique'           => 'Nomor telepon sudah terdaftar.',
-            'username_pelanggan.required' => 'Username wajib diisi.',
-            'username_pelanggan.max'      => 'Username maksimal 20 karakter.',
-            'username_pelanggan.unique'   => 'Username sudah digunakan.',
-            'password_pelanggan.required' => 'Password wajib diisi.',
-            'password_pelanggan.min'      => 'Password minimal 4 karakter.',
-            'password_pelanggan.max'      => 'Password maksimal 20 karakter.',
-        ]);
-
-        Pelanggan::create([
-            'nama_pelanggan'     => $request->nama_pelanggan,
-            'alamat'             => $request->alamat,
-            'no_telepon'         => $request->no_telepon,
-            'username_pelanggan' => $request->username_pelanggan,
-            'password_pelanggan' => $request->password_pelanggan,
-        ]);
-
-        return redirect()->route('pelanggan.index')
-                         ->with('success', 'Data pelanggan berhasil ditambahkan!');
-    }
-
-    // 4. Detail Informasi Pelanggan
+    // 3. Detail Informasi Pelanggan
     public function show($id)
     {
         $pelanggan = Pelanggan::findOrFail($id);
         return view('pelanggan.show', compact('pelanggan'));
     }
 
-    // 5. Form Edit Pelanggan
+    // 4. Form Edit Pelanggan
     public function edit($id)
     {
         $pelanggan = Pelanggan::findOrFail($id);
         return view('pelanggan.edit', compact('pelanggan'));
     }
 
-    // 6. Update Data Pelanggan
+    // 5. Update Data Pelanggan
     public function update(Request $request, $id)
     {
         $pelanggan = Pelanggan::findOrFail($id);
@@ -130,7 +88,7 @@ class PelangganController extends Controller
                          ->with('success', 'Data pelanggan berhasil diperbarui!');
     }
 
-    // 7. Hapus Data Pelanggan
+    // 6. Hapus Data Pelanggan
     public function destroy($id)
     {
         $pelanggan = Pelanggan::findOrFail($id);

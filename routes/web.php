@@ -35,7 +35,7 @@ Route::middleware(['cek.role:pelanggan'])->group(function () {
 // VVVVVVV Fitur Admin VVVVVVV
 Route::middleware(['cek.role:admin'])->group(function () {
     // Fitur CRUD Pelanggan (May)
-    Route::resource('pelanggan', PelangganController::class);
+Route::resource('pelanggan', PelangganController::class)->except(['create', 'store']);
 
     // Fitur Status & Tracking Laundry (Reyhan)
     Route::get('/status', [StatusController::class, 'index'])->name('status.index');
