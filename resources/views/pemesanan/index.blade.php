@@ -5,7 +5,7 @@
 <div class="card cw-card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0 fw-bold">Data Pemesanan Laundry</h5>
-        <a href="{{ route('pemesanan.create') }}" class="btn btn-primary btn-sm">+ Buat Pesanan</a>
+
     </div>
     <div class="card-body">
         <form action="{{ route('pemesanan.index') }}" method="GET" class="row g-2 mb-3">
