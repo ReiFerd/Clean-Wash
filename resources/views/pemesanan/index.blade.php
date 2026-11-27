@@ -35,8 +35,8 @@
                         <td>{{ \Carbon\Carbon::parse($p->tanggal_transaksi)->format('d M Y') }}</td>
                         <td><span class="badge bg-primary badge-status">{{ $p->status_laundry }}</span></td>
                         <td>
-                            <a href="{{ route('pemesanan.show', $p->id_transaksi) }}" class="btn btn-info btn-sm text-white">Detail</a>
-                            <a href="{{ route('pemesanan.edit', $p->id_transaksi) }}" class="btn btn-warning btn-sm">Edit</a>
+
+
                             <form action="{{ route('pemesanan.destroy', $p->id_transaksi) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus pesanan ini?')">
                                 @csrf
                                 @method('DELETE')
