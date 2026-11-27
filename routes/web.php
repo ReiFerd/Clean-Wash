@@ -46,5 +46,9 @@ Route::resource('pelanggan', PelangganController::class)->except(['create', 'sto
     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
 
     // Fitur CRUD Pemesanan Laundry (Kirana)
+    Route::get('/pemesanan/{id}/verifikasi', [PemesananController::class, 'verifikasi'])->name('pemesanan.verifikasi');
+    Route::post('/pemesanan/{id}/verifikasi/terima', [PemesananController::class, 'terimaPembayaran'])->name('pemesanan.verifikasi.terima');
+    Route::post('/pemesanan/{id}/verifikasi/tolak', [PemesananController::class, 'tolakPembayaran'])->name('pemesanan.verifikasi.tolak');
+
     Route::resource('pemesanan', PemesananController::class);
 });

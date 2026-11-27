@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\DetailTransaksi;
 use App\Models\Layanan;
+use App\Models\Pembayaran;
 use App\Models\Pelanggan;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class PemesananController extends Controller
     {
         $keyword = $request->input('keyword');
 
-        $pemesanans = Transaksi::with(['pelanggan', 'detailTransaksi.layanan'])
+        $pemesanans = Transaksi::with(['pelanggan', 'detailTransaksi.layanan', 'pembayaran'])
             ->when($keyword, function ($q) use ($keyword) {
                 $q->whereHas('pelanggan', fn ($p) => $p->where('nama_pelanggan', 'like', "%{$keyword}%"))
                   ->orWhere('id_transaksi', $keyword);
@@ -130,6 +131,59 @@ class PemesananController extends Controller
                          ->with('success', 'Pesanan laundry berhasil diperbarui!');
     }
 
+    public function verifikasi($id)
+    {
+        $pemesanan = Transaksi::with([
+            'pelanggan',
+            'pembayaran',
+            'detailTransaksi.layanan'
+        ])->findOrFail($id);
+
+        $pembayaran = $pemesanan->pembayaran;
+
+        if (!$pembayaran) {
+            return redirect()->route('pemesanan.index')
+                ->with('error', 'Data pembayaran tidak ditemukan.');
+        }
+
+        return view('pemesanan.verifikasi', compact('pemesanan', 'pembayaran'));
+    }
+
+    public function terimaPembayaran($id)
+    {
+        $transaksi = Transaksi::with('pembayaran')->findOrFail($id);
+        $pembayaran = $transaksi->pembayaran;
+
+        if (!$pembayaran || $pembayaran->status_pembayaran !== 'menunggu_verifikasi') {
+            return redirect()->route('pemesanan.index')
+                ->with('error', 'Pembayaran tidak dapat diverifikasi.');
+        }
+
+        $pembayaran->update([
+            'status_pembayaran' => 'sudah_dibayar',
+        ]);
+
+        return redirect()->route('pemesanan.index')
+            ->with('success', 'Pembayaran berhasil diterima.');
+    }
+
+    public function tolakPembayaran($id)
+    {
+        $transaksi = Transaksi::with('pembayaran')->findOrFail($id);
+        $pembayaran = $transaksi->pembayaran;
+
+        if (!$pembayaran || $pembayaran->status_pembayaran !== 'menunggu_verifikasi') {
+            return redirect()->route('pemesanan.index')
+                ->with('error', 'Pembayaran tidak dapat ditolak.');
+        }
+
+        $pembayaran->update([
+            'status_pembayaran' => 'ditolak',
+        ]);
+
+        return redirect()->route('pemesanan.index')
+            ->with('success', 'Pembayaran berhasil ditolak.');
+    }
     public function destroy($id)
     {
         $transaksi = Transaksi::findOrFail($id);
